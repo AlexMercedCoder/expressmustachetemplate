@@ -8,7 +8,6 @@ const {
   SECRET = "secret",
   NODE_ENV = "development",
 } = process.env;
-console.log(PORT);
 
 //Bringing in Express
 const express = require("express");
@@ -18,14 +17,15 @@ const app = express();
 const session = require("express-session");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
+const { log } = require("mercedlogger");
 
 ////////////////
 // Set View Engine
 ////////////////
-const mustacheExpress = require('mustache-express');
-app.engine('mst', mustacheExpress());
-app.set('view engine', 'mst');
-app.set('views', __dirname + '/views');
+const mustacheExpress = require("mustache-express");
+app.engine("mst", mustacheExpress());
+app.set("view engine", "mst");
+app.set("views", __dirname + "/views");
 
 ////////////
 //MIDDLEWARE
@@ -53,5 +53,5 @@ app.get("/", (req, res) => {
 
 //LISTENER
 app.listen(PORT, () => {
-  console.log(`Your are listening on port ${PORT}`);
+  log.green("Server Start", `Your are listening on port ${PORT}`);
 });
